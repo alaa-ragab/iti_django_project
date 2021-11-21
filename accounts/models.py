@@ -25,3 +25,6 @@ class ProfileModel(models.Model):
     Birthdate = models.CharField(max_length=30, blank=True)
     facebook_link = models.URLField(blank=True)
     country = models.CharField(max_length=15, choices=choice, blank=True)
+
+    def __str__(self):
+        return str(self.user)

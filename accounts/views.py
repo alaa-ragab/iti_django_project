@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
 from .form import UserForm, ProfileForm
+from .models import ProfileModel
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 # Create your views here.
@@ -23,24 +25,56 @@ def register(request):
 
 def login_fn(request):
     if request.method == "POST":
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
-        auth = authenticate(request, username=username, password=password)
+        auth = authenticate(request, email=email, password=password)
         if auth is not None:
-            print("dddd")
             login(request, auth)
             # return redirect('/')
     return render(request, 'login.html')
 
 
 def profile(request):
-    pass
+    profile_obj = ProfileModel.objects.get(user=request.user)
+    print(profile_obj)
+    context = {
+        "profile": profile_obj
+    }
+    return render(request, 'profile.html', context)
 
 
 def edit_profile(request):
-    pass
+    profile_obj = ProfileModel.objects.get(user=request.user)
+    profileform = ProfileForm(instance=profile_obj)
+    if request.method == "POST":
+        profileform = ProfileForm(request.POST, request.FILES, instance=profile_obj)
+        if profileform.is_valid:
+            profileform.save()
+            return redirect("accounts:profile")
+    context = {
+        "profileform": profileform,
+        "profile_obj": profile_obj
+    }
+
+    return render(request, 'edit_profile.html', context)
 
 
 def logout_fn(request):
     logout(request)
     return redirect('/trainee/login')
+
+
+# pattern against ^01[0-2]\d{8}$
+
+"""def change_password(request):
+    pform = PasswordChangeForm(request.user)
+    if request.method == "POST":
+        pform = PasswordChangeForm(request.POST, request.user)
+        if pform.is_valid:
+            pform.save()
+            return redirect("accounts:profile")
+    context = {
+        "change_pass_form": pform
+    }
+    return render(request, 'change_password.html', context)
+"""
