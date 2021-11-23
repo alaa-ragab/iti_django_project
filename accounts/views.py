@@ -3,7 +3,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
 from .form import UserForm, ProfileForm
 from .models import ProfileModel
-from django.contrib.auth.forms import PasswordChangeForm
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -61,7 +61,7 @@ def edit_profile(request):
 
 def logout_fn(request):
     logout(request)
-    return redirect('/trainee/login')
+    return redirect('accounts:login')
 
 
 # pattern against ^01[0-2]\d{8}$
@@ -76,5 +76,5 @@ def logout_fn(request):
     context = {
         "change_pass_form": pform
     }
-    return render(request, 'change_password.html', context)
+    return render(request, 'password_change_form.html', context)
 """
