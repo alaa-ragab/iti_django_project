@@ -33,6 +33,8 @@ urlpatterns = [
          name='password_reset_complete'),
 
     path('logout/', views.logout_fn, name="logout"),
+    path('activate-user/<uidb64>/<token>',
+         views.activate_user, name='activate'),
 ]
 
 '''
