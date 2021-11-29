@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Projects</title>
+    </head>
+    <body>
+        {% for project in projects%}
+        <ul>
+            <li>{{project.project_id}}</li>
+            <li>{{project.title}}</li>
+            <li>{{project.details}}</li>
+            <li>{{project.total_target}}</li>
+            <li>{{project.start_time}}</li>
+            <li>{{project.end_time}}</li>
+            <li>{{project.donation}}</li>
+            <li>{{project.avg_rate}}</li>
+            <a href="{% url 'project:viewone' project.project_id%}"
+                >Enter Project</a
+            >
+        </ul>
+        {% endfor %}
+        <a href="{% url 'project:add' %}">Add New Project</a>
+    </body>
+</html>
