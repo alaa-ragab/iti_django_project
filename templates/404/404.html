@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}page not found{% endblock %}
+
+{% block body %}
+<div class="page-title background-page">
+    <div class="container">
+        <h1>404</h1>
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="/">Home</a><span>/</span></li>
+                <li>404</li>
+            </ul>
+        </div><!-- .breadcrumbs -->
+    </div>
+</div><!-- .page-title -->
+<div class="container">
+    <div class="main-content main-404">
+        <img src="{% static " images/404.png" %}" alt="">
+        <h2>Page not found...</h2>
+        <div class="button">
+            <a href="/" class="btn-secondary">Back to home</a>
+            <a href="#" class="btn-primary">Explore all Campaigns</a>
+        </div>
+    </div>
+</div><!-- .container -->
+<br /> <br /> <br /> <br />
+{% endblock %}

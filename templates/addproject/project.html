@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Project</title>
+    </head>
+    <body>
+        <ul>
+            <li>{{project.title}}</li>
+            <li>{{project.total_target}}</li>
+            <li>{{project.donation}}</li>
+            <ul>
+                {% for comment in comments%}
+                <li>{{comment.comment}}</li>
+                {% endfor%}
+            </ul>
+        </ul>
+        <form method="post">
+            {% csrf_token %}
+            <input type="number" name="donate" />
+            <button type="submit" name="donate_sub">Donate</button>
+            <br />
+            <input type="text" name="comment" />
+            <button type="submit" name="comment_sub">Add Comment</button>
+            <br />
+            <input type="text" name="reportpro" />
+            <button type="submit" name="reportpro_sub">Report</button>
+            <br />
+            <input type="number" name="rate" max = '10' min = '0'/>
+            <button type="submit" name="rate_sub">Rate</button>
+            <br/>
+        <a href="{% url 'project:viewall' %}">Back</a>
+        </form>
+    </body>
+</html>
