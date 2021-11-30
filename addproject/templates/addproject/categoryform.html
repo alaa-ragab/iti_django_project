@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        label{
+            font-weight: bold;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+<h2 class="alert alert-info p-4 m-4">Add Category</h2>
+<div class = 'container'>
+{% load widget_tweaks %}
+<form method= 'post' enctype="multipart/form-data">
+{% csrf_token %}
+<div class="form-group">
+    <label>Category</label>
+{% render_field form.categories class="form-control" placeholder="Title Name" type="text" %}
+</div>
+<button type = 'submit'>Add</button>
+</form>
+
+</div>
+</body>

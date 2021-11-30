@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include 
 from django.conf.urls import url
-from .views import addprojects, projects, project
+from .views import addprojects, projects, project, category
 
 app_name = 'project'
 
@@ -24,4 +24,5 @@ urlpatterns = [
     path('', projects , name = 'viewall'),
     url(r'([0-9]+)', project , name = 'viewone'),
     path('addproject', addprojects, name = 'add'),
+    path('addcategory', category, name = 'addcategory'),
 ]

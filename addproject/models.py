@@ -46,9 +46,13 @@ class ProjectsTags(models.Model):
     tags = models.CharField(max_length=20)
 
 
-
 class ProjectsCategory(models.Model):
-    categories = models.CharField(max_length=20, blank=True, null=True,)    
+    categories = models.CharField(max_length=20, blank=True, null=True)    
+    def __str__(self):
+        return str(self.categories)
+
+
+
 
     
     

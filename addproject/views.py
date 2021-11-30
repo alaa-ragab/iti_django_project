@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from .models import Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, ReportedComments
-from .form import ProjectForm
+from .form import ProjectForm, CategoryForm
 
 # Create your views here.
 def projects(request):
@@ -60,11 +60,17 @@ def project(request, *args):
 
         if 'report_com' in request.POST:
             ReportedComments.objects.create(com_id =int(request.POST['com_id']), com_report = 'Reported Comment')
-            
-
+        
         # canceling project        
 
         return redirect(f'/{args[0]}')
         
+def category(request):
+    form = CategoryForm()
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        form.save()
+    return render(request, 'addproject/categoryform.html', {'form' : form})   
+    
 
 

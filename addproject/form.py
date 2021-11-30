@@ -7,7 +7,7 @@ class ProjectForm(forms.ModelForm):
             model = Project
             fields = ['title',  'details', 'total_target', 'start_time', 'end_time', 'tag', 'category']
 
-class Category(forms.ModelForm):
+class CategoryForm(forms.ModelForm):
     class Meta:
         model = ProjectsCategory
         fields = '__all__'
