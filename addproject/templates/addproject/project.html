@@ -5,6 +5,8 @@
         <title>Project</title>
     </head>
     <body>
+        <form method="post">
+            {% csrf_token %}
         <ul>
             <li>{{project.title}}</li>
             <li>{{project.total_target}}</li>
@@ -12,11 +14,11 @@
             <ul>
                 {% for comment in comments%}
                 <li>{{comment.comment}}</li>
+                <button type="submit" name="report_com">Report</button>
+                <input type="hidden" name = 'com_id' value = '{{comment.com_id}}'>
                 {% endfor%}
             </ul>
         </ul>
-        <form method="post">
-            {% csrf_token %}
             <input type="number" name="donate" />
             <button type="submit" name="donate_sub">Donate</button>
             <br />

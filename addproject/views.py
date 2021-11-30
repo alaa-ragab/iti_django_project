@@ -2,7 +2,7 @@ from django.http.response import HttpResponseBase
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
-from .models import Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects
+from .models import Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, ReportedComments
 from .form import ProjectForm
 
 # Create your views here.
@@ -54,6 +54,10 @@ def project(request, *args):
 
         if 'reportpro_sub' in request.POST:
             ReportedProjects.objects.create(project_id = proid, pro_report = request.POST['reportpro'])
+
+        if 'report_com' in request.POST:
+            ReportedComments.objects.create(com_id =int(request.POST['com_id']), com_report = 'Reported Comment')
+            
 
         # canceling project
         # report comments    
