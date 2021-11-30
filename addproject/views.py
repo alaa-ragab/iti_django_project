@@ -21,7 +21,10 @@ def addprojects(request, *args):
         form = ProjectForm(request.POST, request.FILES)
     
         if form.is_valid():
-            form.save()
+            myform = form.save(commit=False)
+            myform.user = request.user
+            myform.save()
+            
             return redirect('/')
 
         else:
@@ -59,9 +62,7 @@ def project(request, *args):
             ReportedComments.objects.create(com_id =int(request.POST['com_id']), com_report = 'Reported Comment')
             
 
-        # canceling project
-        # report comments    
-        
+        # canceling project        
 
         return redirect(f'/{args[0]}')
         

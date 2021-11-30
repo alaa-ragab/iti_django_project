@@ -7,6 +7,7 @@
     <style>
         label{
             font-weight: bold;
+            font-size: large;
         }
     </style>
 </head>
@@ -17,30 +18,43 @@
 <form method= 'post' enctype="multipart/form-data">
 {% csrf_token %}
 <div class="form-group">
+    <label>Title</label>
 {% render_field form.title class="form-control" placeholder="Title Name" type="text" %}
 </div>
 
 <div class="form-group">
-{% render_field form.total_target type="number" class="form-control" placeholder="Target" %}
-</div>
+    <label>Category</label>
+    {% render_field form.category class="form-control"  %}
+    </div>
+
+    <div class="form-group">
+        <label>Target</label>
+    {% render_field form.total_target type="number" class="form-control" placeholder="Target" %}
+    </div>
 
 <div class="form-group">
+    <label>Tags</label>
+    {% render_field form.tag|attr:"multiple" class="form-control" %}
+    </div>    
+
+<div class="form-group">
+    <label>Details</label>
 {% render_field form.details type="textbox" class="form-control"  placeholder="Details" %}
 </div>
 
 <div class="form-group">
+    <label>Starts at</label>
 {% render_field form.start_time type="date" class="form-control" placeholder="Starts at" %}
 </div>
 
+<div class="form-group">
+    <label>Ends at</label>
+{% render_field form.end_time type="date" class="form-control" id="exampleInputPassword1" placeholder="Ends at" %}
+</div>
 
 <div class="form-group mt-4">
 <label for="pic">Pictures</label>
 <input type="file" multiple class="form-control-file" id="pic" name='pic'>
-</div>
-
-
-<div class="form-group">
-{% render_field form.end_time type="date" class="form-control" id="exampleInputPassword1" placeholder="Ends at" %}
 </div>
 
 <div>

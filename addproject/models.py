@@ -1,9 +1,11 @@
 from django.db import models
-from django.db import models
+from django.contrib.auth.models import User
+
 
 
 class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     details = models.CharField(max_length=400)
     total_target = models.IntegerField()
@@ -13,9 +15,9 @@ class Project(models.Model):
     ratings = models.IntegerField(default=0)
     raters = models.IntegerField(default=0)
     avg_rate = models.FloatField(default=0)
-
-    # category = models.Choices()
-    # tags = models.Choices()
+    category = models.ForeignKey('ProjectsCategory', on_delete=models.CASCADE)
+    tag_choices = [('tag1', 'tag1'), ('tag2', 'tag2'), ('tag3', 'tag3'), ('tag4', 'tag4'), ('tag5', 'tag5'), ('tag6', 'tag6'),]
+    tag = models.ManyToManyField('ProjectsTags', choices=tag_choices)
 
 
 class ProjectPics(models.Model):
@@ -34,12 +36,21 @@ class ReportedComments(models.Model):
     com_report = models.CharField(max_length=400)    
 
 
-
 class ReportedProjects(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     pro_report = models.CharField(max_length=400)            
 
 
+
 class ProjectsTags(models.Model):
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    tag = models.CharField(max_length=40)   
+    tags = models.CharField(max_length=20)
+
+
+
+class ProjectsCategory(models.Model):
+    categories = models.CharField(max_length=20, blank=True, null=True,)    
+
+    
+    
+
+    
