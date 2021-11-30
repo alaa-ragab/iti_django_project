@@ -1,9 +1,139 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-{{profileform.as_p}}
-    sda
-    <button type="submit" > submit</button>
-</form>
+    <section class="content ">
+    <form method="POST" class="row" enctype="multipart/form-data">
+                        {% csrf_token %}
+            <div class="col-md-3">
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center" id="blah">
+                            {% if profile.img %}
+                                <img class="profile-user-img  img-circle mb-2" style="width: 150px; height: 150px"
+                                     id="avatar" src="{{profile.img.url}}">
+                            {% else %}
+                                <img class="profile-user-img img-fluid img-circle mb-2" style="max-height: 150px"
+                                     id="avatar" src="https://via.placeholder.com/150">
+                            {% endif %}
+                         {% render_field form.img %}
+                                    {% if form.img.errors %}
+                                        {{ form.img.errors }}
+                                    {% endif %}
+                        </div>
+                        <h3 class="profile-username text-center"></h3>
+
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"> Porfile </h3>
+                        <div class="card-tools">
+                        </div>
+                    </div>
+
+                        <div class="card-body row ">
+<div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>First Name </label>
+                                </div>
+                                <div class="col-md-12">
+                                   <input name="fname" value="{{ user.first_name }}" class="form-control">
+                                </div>
+                             </div>
+
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Last Name </label>
+                                </div>
+                                <div class="col-md-12">
+                                   <input name="lname" value="{{ user.last_name }}" class="form-control">
+                                </div>
+                             </div>
+
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Username </label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text"  name="username" class="form-control" value="{{ user.username }}">
+                                </div>
+                            </div>
+<div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Email </label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="email" class="form-control" value="{{ user.email }}" readonly=readonly">
+                                </div>
+                            </div>
+
+
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Phone </label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.phone class="form-control" placeholder="Phone"  required=requrequired%}
+                                    {% if form.phone.errors %}
+                                        {{ form.phone.errors }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>birthdate</label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.Birthdate class="form-control" placeholder="birthdate" type="date" %}
+                                    {% if form.Birthdate.errors %}
+                                        {{ form.Birthdate.errors }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Facebook account</label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.facebook_link class="form-control" placeholder="facebook profile link" %}
+                                    {% if form.facebook_link.errors %}
+                                        {{ form.facebook_link.errors }}
+                                    {% endif %}
+                                </div>
+                            </div><div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>country</label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.country class="form-control" placeholder="country" %}
+                                    {% if form.country.errors %}
+                                        {{ form.country.errors }}
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        <div class="col-12">
+                            <div class=" card-footer row">
+                                <div class="col-md-5"></div>
+                                <button type="submit" class="btn  col-3 mx-3   btn-outline-primary  ">Add</button>
+                                <button type="reset" class="btn  col-3   btn-outline-primary  ">cancel</button>
+
+
+                            </div>
+                        </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+                            </form>
+
+    </section>
 {% endblock content %}
+

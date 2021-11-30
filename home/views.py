@@ -1,4 +1,4 @@
-import datetime
+"""import datetime
 
 from django.db.models import Count, Sum, Value, CharField
 from django.shortcuts import render
@@ -54,4 +54,4 @@ def get_categories_alphabetical():
 
 
 def calc_percentage(n1, n2):
-    return (n1 / n2) * 100
+    return (n1 / n2) * 100"""

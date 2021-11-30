@@ -35,6 +35,7 @@ urlpatterns = [
     path('logout/', views.logout_fn, name="logout"),
     path('activate-user/<uidb64>/<token>',
          views.activate_user, name='activate'),
+    path('delete_user',views.delete_user,name='delete_user')
 ]
 
 '''
