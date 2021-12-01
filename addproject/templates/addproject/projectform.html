@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>New Project</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        label{
-            font-weight: bold;
-            font-size: large;
-        }
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 <h2 class="alert alert-info p-4 m-4">Add New Project</h2>
 <div class = 'container'>
 {% load widget_tweaks %}
@@ -20,11 +8,16 @@
 <div class="form-group">
     <label>Title</label>
 {% render_field form.title class="form-control" placeholder="Title Name" type="text" %}
+    {% if form.title.errors %}
+        {{  form.title.errors }}
+    {% endif %}
+
 </div>
 
 <div class="form-group">
     <label>Category</label>
     {% render_field form.category class="form-control"  %}
+
     </div>
 
     <div class="form-group">
@@ -64,4 +57,4 @@
 </form>
 
 </div>
-</body>
+{% endblock content %}

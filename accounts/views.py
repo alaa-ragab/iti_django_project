@@ -64,15 +64,18 @@ def register(request):
 
 
 def login_fn(request):
-    if request.method == "POST":
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        auth = authenticate(username=email, password=password)
+    if request.user.is_authenticated:
+        return redirect('project:viewall')
+    else:
+        if request.method == "POST":
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            auth = authenticate(username=email, password=password)
 
-        if auth is not None:
-            login(request, auth)
-            print("ssss")
-            # return redirect('/')
+            if auth is not None:
+                login(request, auth)
+                print("ssss")
+                return redirect('project:viewall')
     return render(request, 'login.html')
 
 
@@ -134,8 +137,11 @@ def delete_user(request):
 @login_required(login_url='login')
 def logout_fn(request):
     logout(request)
-    return redirect('accounts:login')
+    return redirect('login')
 
+
+def test(request):
+    return redirect('login')
 
 # pattern against ^01[0-2]\d{8}$
 

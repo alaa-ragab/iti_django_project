@@ -18,11 +18,13 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+from accounts import views
 
 urlpatterns = [
     # path('', include('home.urls')),
     path('admin/', admin.site.urls),
     path('users/', include('accounts.urls')),
-    path('', include('addproject.urls')),
+    path('project/', include('addproject.urls')),
+    path('',views.test,name="land")
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
