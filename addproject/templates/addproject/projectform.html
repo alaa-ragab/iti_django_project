@@ -1,60 +1,115 @@
 {% extends 'base.html' %}
-{% block content %}
-<h2 class="alert alert-info p-4 m-4">Add New Project</h2>
-<div class = 'container'>
 {% load widget_tweaks %}
-<form method= 'post' enctype="multipart/form-data">
-{% csrf_token %}
-<div class="form-group">
-    <label>Title</label>
-{% render_field form.title class="form-control" placeholder="Title Name" type="text" %}
-    {% if form.title.errors %}
-        {{  form.title.errors }}
-    {% endif %}
+{% block content %}
+    <h2 class="alert alert-info p-4 m-4">Add New Project</h2>
+    <section class="content ">
+        <form method="POST" class="row" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-body row ">
+                <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Title</label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.title class="form-control" placeholder="Title Name" type="text" %}
+                                    {% if form.title.errors %}
+                                        {{  form.title.errors }}
+                                    {% endif %}
+                                </div>
+                            </div>
 
-</div>
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Category</label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.category class="form-control"  %}
+                                    {% if form.category.errors %}
+                                        {{  form.category.errors }}
+                                    {% endif %}
+                                </div>
+                            </div>
 
-<div class="form-group">
-    <label>Category</label>
-    {% render_field form.category class="form-control"  %}
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Target</label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.total_target type="number" class="form-control" placeholder="Target" %}
+                                    {% if form.total_target.errors %}
+                                        {{  form.total_target.errors }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Email </label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.details type="textbox" class="form-control"  placeholder="Details" %}
+                                    {% if form.details.errors %}
+                                        {{  form.details.errors }}
+                                    {% endif %}
+                                </div>
+                            </div>
 
-    </div>
 
-    <div class="form-group">
-        <label>Target</label>
-    {% render_field form.total_target type="number" class="form-control" placeholder="Target" %}
-    </div>
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Phone </label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.start_time type="date" class="form-control" placeholder="Starts at" %}
+                                    {% if form.start_date.errors %}
+                                        {{  form.start_date.errors }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>birthdate</label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.end_time type="date" class="form-control" placeholder="Ends at" %}
+                                    {% if form.end_date.errors %}
+                                        {{  form.end_date.errors }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>Facebook account</label>
+                                </div>
+                                <div class="col-md-12">
+                                    {% render_field form.tag|attr:"multiple" class="form-control" %}
+                                    {% if form.tag.errors %}
+                                        {{  form.tag.errors }}
+                                    {% endif %}
+                                </div>
+                            </div><div class="row col-md-5 m-3 form-group">
+                                <div class="col-md-12">
+                                    <label>country</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="pic">Pictures</label>
+                                    <input type="file" multiple class="form-control-file" id="pic" name='pic'>
+                                </div>
+                            </div>
 
-<div class="form-group">
-    <label>Tags</label>
-    {% render_field form.tag|attr:"multiple" class="form-control" %}
-    </div>    
+                        <div class="col-12">
+                            <div class=" card-footer row">
+                                <div class="col-md-5"></div>
+                                <button type="submit" class="btn  col-3 mx-3   btn-outline-primary  ">Add</button>
+                                <button type="reset" class="btn  col-3   btn-outline-primary  ">cancel</button>
+                            </div>
+                        </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+                            </form>
 
-<div class="form-group">
-    <label>Details</label>
-{% render_field form.details type="textbox" class="form-control"  placeholder="Details" %}
-</div>
-
-<div class="form-group">
-    <label>Starts at</label>
-{% render_field form.start_time type="date" class="form-control" placeholder="Starts at" %}
-</div>
-
-<div class="form-group">
-    <label>Ends at</label>
-{% render_field form.end_time type="date" class="form-control" id="exampleInputPassword1" placeholder="Ends at" %}
-</div>
-
-<div class="form-group mt-4">
-<label for="pic">Pictures</label>
-<input type="file" multiple class="form-control-file" id="pic" name='pic'>
-</div>
-
-<div>
-<button type="submit" value="Submit" class = 'btn btn-primary' > Submit </button>
-</div>
-
-</form>
-
-</div>
+    </section>
 {% endblock content %}
+
+
