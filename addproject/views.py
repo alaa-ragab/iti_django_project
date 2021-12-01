@@ -24,7 +24,11 @@ def addprojects(request, *args):
             myform = form.save(commit=False)
             myform.user = request.user
             myform.save()
-            print(myform.tag)
+            #img handle
+            id = Project.objects.get(project_id = myform.project_id)
+            pics = request.FILES.getlist('pic')
+            for pic in pics:
+                ProjectPics.objects.create(project_id = id, pic = pic)
             return redirect('project:viewall')
 
     return render(request, 'addproject/projectform.html', {'form': form})
