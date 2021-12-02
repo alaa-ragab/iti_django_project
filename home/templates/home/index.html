@@ -68,28 +68,28 @@
 
 <div class="latest campaign mt-5">
     <div class="container-fluid">
-        <h2 class="title">Latest Projects</h2>
+        <h2 class="title">Latest Featured Projects</h2>
         <div class="description">Recently created projects.</div>
         <div class="campaign-content">
             <div class="row">
-                <!-- { for project in latest_projects } -->
+                {% for project in latest_featured %}
                 <div class="col-lg-4 col-sm-6 col-6">
                     <div class="campaign-item">
                         <div class="campaign-box">
-                            <a href="#" class="category">{{ project.project_category }}</a>
-                            <div class="campaign-description"> {{ project.project_desc }}</div>
+                            <a href="#" class="category">{{ project.project_id }}</a>
+                            <div class="campaign-description"> {{ project.project_details }}</div>
                             <div class="campaign-author">
                                 <a class="author-icon" href="#">
                                     <img src="{{ project.project_owner_img }}" alt="">
                                 </a>
                                 <a class="author-name" href="#">
-                                    <span>by</span>{{ project.project_owner }}
+                                    <span>by</span>{{ project.project_title }}
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- { endfor } -->
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -100,24 +100,24 @@
         <div class="description">Recently created projects.</div>
         <div class="campaign-content">
             <div class="row">
-                <!-- { for project in latest_projects } -->
+                {% for project in get_latest_projects %}
                 <div class="col-lg-4 col-sm-6 col-6">
                     <div class="campaign-item">
                         <div class="campaign-box">
                             <a href="#" class="category">{{ project.project_category }}</a>
-                            <div class="campaign-description"> {{ project.project_desc }}</div>
+                            <div class="campaign-description"> {{ project.project_details }}</div>
                             <div class="campaign-author">
                                 <a class="author-icon" href="#">
                                     <img src="{{ project.project_owner_img }}" alt="">
                                 </a>
                                 <a class="author-name" href="#">
-                                    <span>by</span>{{ project.project_owner }}
+                                    <span>by</span>{{ project.project_user }}
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- { endfor } -->
+                {% endfor %}
             </div>
         </div>
     </div>

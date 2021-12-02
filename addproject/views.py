@@ -93,7 +93,7 @@ def get_project_data_for_view(model):
                 "project_id": project.project_id,
                 "project_title": project.title,
                 "project_details": project.details,
-                "project_owner": project.user,
+                "project_user": project.user,
                 "project_start_time": project.start_time,
                 "project_end_time": project.end_time,
             }

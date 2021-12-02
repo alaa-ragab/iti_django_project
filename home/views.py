@@ -12,7 +12,6 @@ def index(request):
     context = {
         'latest_featured': get_latest_featured_projects(),
         'get_latest_projects': get_latest_projects(),
-        'latest_projects': get_latest_projects(),
     }
 
     return render(request, 'home/index.html', context)
