@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'home',
     'widget_tweaks',
     'addproject',
-    'django_filters',
+    # 'django_filters',
 
 ]
 

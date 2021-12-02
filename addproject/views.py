@@ -41,7 +41,8 @@ def project(request, id):
     if request.method == 'GET':
         project = Project.objects.filter(project_id=id)[0]
         comments = ProjectComments.objects.filter(project_id=id)
-        return render(request, 'addproject/project.html', {'project': project, 'comments': comments})
+        imgs = ProjectPics.objects.all()
+        return render(request, 'addproject/project.html', {'project': project, 'comments': comments, 'imgs' : imgs})
 
     else:
         project = Project.objects.filter(project_id=id)
@@ -63,7 +64,7 @@ def project(request, id):
 
         if 'reportpro_sub' in request.POST:
             ReportedProjects.objects.create(
-                project_id=proid, pro_report=request.POST['reportpro'])
+                project_id=proid, pro_report='Reported Project')
 
         if 'report_com' in request.POST:
             ReportedComments.objects.create(com_id=int(
@@ -71,7 +72,7 @@ def project(request, id):
 
         # canceling project
 
-        return redirect(f'/{args[0]}')
+        return redirect(f'/')
 
 
 @login_required(login_url='login')
