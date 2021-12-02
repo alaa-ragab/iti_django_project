@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.views.generic import ListView
 from django.shortcuts import get_object_or_404, render
 from addproject.models import Project, ProjectPics
-from addproject.views import projects
+from addproject.views import get_project_data_for_view, projects
 
 # # Create your views here.
 app_name = 'home'
@@ -20,14 +20,14 @@ def index(request):
 
 def get_latest_featured_projects():
     model = Project.objects.order_by('-start_time')
-    latest_featured_projects = projects(model)
+    latest_featured_projects = get_project_data_for_view(model)
     return latest_featured_projects
 
 
 def get_latest_projects():
     # returns 5 latest 5 projects based on start_date
-    latest_projects_model = Project.objects.order_by('-start_date')[:5]
-    latest_projects_for_view = projects(latest_projects_model)
+    latest_projects_model = Project.objects.order_by('-start_time')[:5]
+    latest_projects_for_view = get_project_data_for_view(latest_projects_model)
     return latest_projects_for_view
 
 

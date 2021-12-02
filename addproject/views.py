@@ -1,8 +1,9 @@
+import datetime
 from django.http.response import HttpResponseBase
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
-from .models import Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, ReportedComments
+from .models import FeaturedProject, Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, ReportedComments
 from .form import ProjectForm, CategoryForm
 from django.contrib.auth.decorators import login_required
 
@@ -79,3 +80,22 @@ def category(request):
         form = CategoryForm(request.POST)
         form.save()
     return render(request, 'addproject/categoryform.html', {'form': form})
+
+
+def get_project_data_for_view(model):
+    projects_data_list = []
+    for project in model:
+        if isinstance(project, FeaturedProject):
+            project = project.project
+
+        projects_data_list.append(
+            {
+                "project_id": project.project_id,
+                "project_title": project.title,
+                "project_details": project.details,
+                "project_owner": project.user,
+                "project_start_time": project.start_time,
+                "project_end_time": project.end_time,
+            }
+        )
+    return projects_data_list

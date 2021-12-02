@@ -51,3 +51,12 @@ class ProjectsCategory(models.Model):
 
     def __str__(self):
         return str(self.categories)
+
+
+class FeaturedProject(models.Model):
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="featured_project")
+    date_featured = models.DateField()
+
+    def __str__(self):
+        return self.project.title
