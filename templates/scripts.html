@@ -7,7 +7,9 @@
 <!-- Bootstrap 4 -->
 <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'assets/plugins/toastr/toastr.min.js' %}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- AdminLTE App -->
 <script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
@@ -18,3 +20,46 @@
 <script src="{% static 'assets/dist/js/demo.js' %}"></script>
 <script src="{% static 'assets/dist/js/main.js' %}"></script>
 <script src="{% static 'assets/dist/js/jspdf.js' %}"></script>
+<script>
+    $('.owl-carousel').owlCarousel({
+        stagePadding: 200,
+        loop: true,
+        margin: 10,
+        nav: false,
+        items: 1,
+        dots: false,
+        lazyLoad: true,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1,
+                stagePadding: 60
+            },
+            600: {
+                items: 1,
+                stagePadding: 100
+            },
+            1000: {
+                items: 1,
+                stagePadding: 200
+            },
+            1200: {
+                items: 1,
+                stagePadding: 250
+            },
+            1400: {
+                items: 1,
+                stagePadding: 300
+            },
+            1600: {
+                items: 1,
+                stagePadding: 350
+            },
+            1800: {
+                items: 1,
+                stagePadding: 400
+            }
+        }
+    })
+
+</script>

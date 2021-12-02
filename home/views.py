@@ -1,57 +1,61 @@
-"""import datetime
+from django.db.models import Q
+from django.views.generic import ListView
+from django.shortcuts import get_object_or_404, render
+from addproject.models import Project, ProjectPics
+from addproject.views import projects
 
-from django.db.models import Count, Sum, Value, CharField
-from django.shortcuts import render
-
-# Create your views here.
-from admins.models import FeaturedProject
-from projects.models import Project, Category
-from projects.views.list_projects import get_project_data_for_view
+# # Create your views here.
+app_name = 'home'
 
 
 def index(request):
-    context = {'latest_featured_projects': get_latest_featured_projects(),
-               'highest_rated_projects': get_highest_rated_projects(),
-               'latest_projects': get_latest_projects(),
-               'categories': get_categories_alphabetical(),
-               # 'extra': get_extra_data()
-               }
+    context = {
+        'latest_featured': get_latest_featured_projects(),
+        'get_latest_projects': get_latest_projects(),
+        'latest_projects': get_latest_projects(),
+    }
 
-    print(context)
-    return render(request, 'home/index.html', context=context)
+    return render(request, 'home/index.html', context)
 
 
 def get_latest_featured_projects():
-    model = FeaturedProject.objects.order_by('-date_featured')
-    latest_featured_projects = get_project_data_for_view(model)
+    model = Project.objects.order_by('-start_time')
+    latest_featured_projects = projects(model)
     return latest_featured_projects
-
-
-def get_highest_rated_projects():
-    # returns 5 projects based on rating by descending order
-    model = Project.objects.order_by('-project_rating')[:5].annotate(
-        num_of_backers=Count('donations'),
-        amount_of_donations=Sum('donations__amount'),
-
-    )  # the '-' is for descending
-    highest_rated_projects = get_project_data_for_view(model)
-    return highest_rated_projects
 
 
 def get_latest_projects():
     # returns 5 latest 5 projects based on start_date
     latest_projects_model = Project.objects.order_by('-start_date')[:5]
-    latest_projects_for_view = get_project_data_for_view(latest_projects_model)
+    latest_projects_for_view = projects(latest_projects_model)
     return latest_projects_for_view
 
 
-def get_categories_alphabetical():
-    categories = Category.objects.order_by('name')
-    return categories
+def showCategoryProjects(request, cat_id):
+    c = get_object_or_404('Categories', pk=cat_id)
+    category_projects = c.projects_set.all()
+    project_pics2 = {}
+
+    for p in category_projects:
+        project_pics = ProjectPics.objects.filter(project=p.id)
+        project_pics2[p.id] = project_pics[0]
+    context = {
+        'category_name': c.title,
+        'c': c,
+        'category_projects': category_projects,
+        'pics':  project_pics2
+    }
+    return render(request, "viewCategory.html", context)
 
 
+class SearchResultsView(ListView):
+    model = Project
+    template_name = 'search_results.html'
 
-
-
-def calc_percentage(n1, n2):
-    return (n1 / n2) * 100"""
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        model = Project.objects.filter(
+            Q(title__icontains=query) | Q(category__name__icontains=query)
+        ).distinct()
+        object_list = projects(model)
+        return object_list
