@@ -15,7 +15,7 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             {% if user.profile.avatar %}
             <div class="image">
-                <img src="{{ request.user.profile.avatar.url }} " class="img-circle elevation-2">
+                <img src="{{ request.user.profile.img.url }} " class="img-circle elevation-2">
             </div>
             {% else %}
             <div class="image">
@@ -24,7 +24,7 @@
             </div>
             {% endif %}
             <div class="info">
-                <a href="#" class="d-block">{{ request.user.username }}</a>
+                <a href="{% url 'profile' %}" class="d-block">{{ request.user.username }}</a>
             </div>
         </div>
 
@@ -35,7 +35,7 @@
                 <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                    <a href="{% url 'home:home' %}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -43,47 +43,11 @@
                     </a>
 
                 </li>
-                {% if 'admins' in user.groups.all.0.name or request.user.is_superuser %}
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-users nav-icon"></i>
-                        <p>
-                            Users
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-users nav-icon"></i>
-                                <p>Users List</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-user-plus nav-icon"></i>
-                                <p>Add User</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="fas fa-lock nav-icon"></i>
-                        <p>
-                            Role
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-
-
-                    {% endif %}
                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                    <a href="{% url 'project:viewall' %}" class="nav-link">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>
-                            Products
+                            projects
 
                         </p>
                     </a>

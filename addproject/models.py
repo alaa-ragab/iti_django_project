@@ -16,6 +16,7 @@ class Project(models.Model):
     avg_rate = models.FloatField(default=0)
     category = models.ForeignKey('ProjectsCategory', on_delete=models.CASCADE)
     tag = models.ManyToManyField('ProjectsTags')
+    created_at = models.DateField(auto_now=True)
 
 
 class ProjectPics(models.Model):

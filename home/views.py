@@ -1,14 +1,13 @@
 from django.db.models import Q
 from django.views.generic import ListView
 from django.shortcuts import get_object_or_404, render
-from addproject.models import Project, ProjectPics
+from addproject.models import Project, ProjectPics, ProjectsCategory
 from addproject.views import get_project_data_for_view, projects
 
 # # Create your views here.
 app_name = 'home'
 
-
-def index(request):
+'''def index(request):
     context = {
         'latest_featured': get_latest_featured_projects(),
         'get_latest_projects': get_latest_projects(),
@@ -42,7 +41,7 @@ def showCategoryProjects(request, cat_id):
         'category_name': c.title,
         'c': c,
         'category_projects': category_projects,
-        'pics':  project_pics2
+        'pics': project_pics2
     }
     return render(request, "viewCategory.html", context)
 
@@ -58,3 +57,16 @@ class SearchResultsView(ListView):
         ).distinct()
         object_list = projects(model)
         return object_list
+'''
+
+
+def home(request):
+    categories = ProjectsCategory.objects.all()
+    latest = Project.objects.order_by('-created_at')[:5]
+    rating = Project.objects.order_by('-avg_rate')[:5]
+
+    context = {'categories': categories,
+               'latest': latest,
+               'rating': rating,
+               }
+    return render(request, 'home/home.html', context)

@@ -2,15 +2,15 @@
 {% load widget_tweaks %}
 {% block content %}
     <section class="content ">
-    <form method="POST" class="row" enctype="multipart/form-data">
-                        {% csrf_token %}
+        <form method="POST" class="row" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="col-md-3">
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center" id="blah">
                             {% if profile.img %}
                                 <img class="profile-user-img  img-circle mb-2" style="width: 150px; height: 150px"
-                                     id="avatar" src="{{profile.img.url}}">
+                                     id="avatar" src="{{ profile.img.url }}">
                             {% else %}
                                 <img class="profile-user-img img-fluid img-circle mb-2" style="max-height: 150px"
                                      id="avatar" src="https://via.placeholder.com/150">
@@ -35,125 +35,134 @@
                         </div>
                     </div>
 
-                        <div class="card-body row ">
-<div class="row col-md-5 m-3 form-group">
-                                <div class="col-md-12">
-                                    <label>First Name </label>
-                                </div>
-                                <div class="col-md-12">
-                                   <input name="fname" value="{{ user.first_name }}" class="form-control">
-                                </div>
-                             </div>
-
-                            <div class="row col-md-5 m-3 form-group">
-                                <div class="col-md-12">
-                                    <label>Last Name </label>
-                                </div>
-                                <div class="col-md-12">
-                                   <input name="lname" value="{{ user.last_name }}" class="form-control">
-                                </div>
-                             </div>
-
-                            <div class="row col-md-5 m-3 form-group">
-                                <div class="col-md-12">
-                                    <label>Username </label>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="text"  name="username" class="form-control" value="{{ user.username }}">
-                                </div>
+                    <div class="card-body row ">
+                        <div class="row col-md-5 m-3 form-group">
+                            <div class="col-md-12">
+                                <label>First Name </label>
                             </div>
-<div class="row col-md-5 m-3 form-group">
-                                <div class="col-md-12">
-                                    <label>Email </label>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="text" name="email" class="form-control" value="{{ user.email }}" readonly=readonly">
-                                </div>
+                            <div class="col-md-12">
+                                <input name="fname" value="{{ user.first_name }}" class="form-control"
+                                       readonly=readonly>
                             </div>
+                        </div>
 
-
-                            <div class="row col-md-5 m-3 form-group">
-                                <div class="col-md-12">
-                                    <label>Phone </label>
-                                </div>
-                                <div class="col-md-12">
-                                    <input value="{{ profile.phone }}" class="form-control">
-                                </div>
+                        <div class="row col-md-5 m-3 form-group">
+                            <div class="col-md-12">
+                                <label>Last Name </label>
                             </div>
-                            <div class="row col-md-5 m-3 form-group">
-                                <div class="col-md-12">
-                                    <label>birthdate</label>
-                                </div>
-                                <div class="col-md-12">
-                                                                       <input value="{{ profile.Birthdate }}" class="form-control">
-
-                                </div>
+                            <div class="col-md-12">
+                                <input name="lname" value="{{ user.last_name }}" class="form-control" readonly=readonly>
                             </div>
-                            <div class="row col-md-5 m-3 form-group">
-                                <div class="col-md-12">
-                                    <label>Facebook account</label>
-                                </div>
-                                <div class="col-md-12">
-                                                                        <input value="{{ profile.facebook_link }}" class="form-control">
+                        </div>
 
-                                </div>
-                            </div><div class="row col-md-5 m-3 form-group">
-                                <div class="col-md-12">
-                                    <label>country</label>
-                                </div>
-                                <div class="col-md-12">
-                                                                       <input value="{{ profile.country }}" class="form-control">
-
-                                </div>
+                        <div class="row col-md-5 m-3 form-group">
+                            <div class="col-md-12">
+                                <label>Username </label>
                             </div>
+                            <div class="col-md-12">
+                                <input type="text" name="username" class="form-control" readonly=readonly
+                                       value="{{ user.username }}">
+                            </div>
+                        </div>
+                        <div class="row col-md-5 m-3 form-group">
+                            <div class="col-md-12">
+                                <label>Email </label>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" name="email" class="form-control" readonly=readonly
+                                       value="{{ user.email }}" readonly=readonly">
+                            </div>
+                        </div>
 
 
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-                    <div class="col-12">
-                            <div class=" card-footer row">
-                                <div class="col-md-5"></div>
-                                <a href="{% url 'edit_profile' %}" class="btn  col-3 mx-3   btn-outline-primary  ">Edit</a>
-                                <button type="button" class="btn  col-3   btn-danger  " data-toggle="modal" data-target="#exampleModal">delete</button>
-
+                        <div class="row col-md-5 m-3 form-group">
+                            <div class="col-md-12">
+                                <label>Phone </label>
+                            </div>
+                            <div class="col-md-12">
+                                <input value="{{ profile.phone }}" class="form-control" readonly=readonly>
+                            </div>
+                        </div>
+                        <div class="row col-md-5 m-3 form-group">
+                            <div class="col-md-12">
+                                <label>birthdate</label>
+                            </div>
+                            <div class="col-md-12">
+                                <input value="{{ profile.Birthdate }}" class="form-control" readonly=readonly>
 
                             </div>
                         </div>
+                        <div class="row col-md-5 m-3 form-group">
+                            <div class="col-md-12">
+                                <label>Facebook account</label>
+                            </div>
+                            <div class="col-md-12">
+                                <input value="{{ profile.facebook_link }}" class="form-control" readonly=readonly>
+
+                            </div>
+                        </div>
+                        <div class="row col-md-5 m-3 form-group">
+                            <div class="col-md-12">
+                                <label>country</label>
+                            </div>
+                            <div class="col-md-12">
+                                <input value="{{ profile.country }}" class="form-control" readonly=readonly>
+
+                            </div>
+                        </div>
+                        <a  href="{% url 'password_change' %}" class="btn btn-primary col-2 m-5">change password</a>
+
+
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <div class="col-12">
+                        <div class=" card-footer row">
+                            <div class="col-md-5"></div>
+                            <a href="{% url 'edit_profile' %}" class="btn  col-3 mx-3   btn-outline-primary  ">Edit</a>
+                            <button type="button" class="btn  col-3   btn-danger  " data-toggle="modal"
+                                    data-target="#exampleModal">delete
+                            </button>
+
+
+                        </div>
+                    </div>
                     <!-- /.card-body -->
                 </div>
 
             </div>
-                            </form>
+        </form>
 
     </section>
 
 
     <!-- modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Enter password</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <form action="{% url 'delete_user' %}" method="POST">
-              {% csrf_token %}
-              <input name="password" type="password" class="form-control" placeholder="password">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Enter password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'delete_user' %}" method="POST">
+                        {% csrf_token %}
+                        <input name="password" type="password" class="form-control" readonly=readonly
+                               placeholder="password">
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">delete</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">delete</button>
                     </form>
 
-      </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 {% endblock content %}
 {% block js %}

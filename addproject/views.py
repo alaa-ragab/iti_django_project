@@ -3,7 +3,8 @@ from django.http.response import HttpResponseBase
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
-from .models import FeaturedProject, Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, ReportedComments
+from .models import FeaturedProject, Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, \
+    ReportedComments
 from .form import ProjectForm, CategoryForm
 from django.contrib.auth.decorators import login_required
 
@@ -36,15 +37,15 @@ def addprojects(request, *args):
 
 
 @login_required(login_url='login')
-def project(request, *args):
+def project(request, id):
     if request.method == 'GET':
-        project = Project.objects.filter(project_id=args[0])[0]
-        comments = ProjectComments.objects.filter(project_id=args[0])
+        project = Project.objects.filter(project_id=id)[0]
+        comments = ProjectComments.objects.filter(project_id=id)
         return render(request, 'addproject/project.html', {'project': project, 'comments': comments})
 
     else:
-        project = Project.objects.filter(project_id=args[0])
-        proid = Project.objects.get(project_id=args[0])
+        project = Project.objects.filter(project_id=id)
+        proid = Project.objects.get(project_id=id)
 
         if 'donate_sub' in request.POST:
             project.update(
@@ -99,3 +100,9 @@ def get_project_data_for_view(model):
             }
         )
     return projects_data_list
+
+
+def get_category_pro(request, id):
+    projects = Project.objects.filter(category_id=id)
+    context = {"projects": projects}
+    return render(request, 'addproject/projects.html', context)

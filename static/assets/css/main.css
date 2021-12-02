@@ -1,15 +1,11 @@
 .button_color {
-    background-color: #7367F0 !important;
-    color: #fff !important;
-}
-
-.tajawal,
-html,
-body {
+        background-color: #7367F0 !important;
+        color: #fff !important;
+    }
+.tajawal ,html ,body{
     font-family: 'Tajawal', sans-serif !important;
 
 }
-
-.dropdown-toggle::after {
+.dropdown-toggle::after{
     color: #4F5962;
 }

@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+    <div class="mt-4"></div>
+      {% for project in projects%}
+
+          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
               <div class="card bg-light d-flex flex-fill">
-                <div class="card-header text-muted border-bottom-0">
-                  Digital Strategist
-                </div>
+                <h2 class="card-header  border-bottom-0">
+{{ project.title}}                </h2>
                 <div class="card-body pt-0">
                   <div class="row">
                     <div class="col-7">
-                      <h2 class="lead"><b>Nicole Pearson</b></h2>
-                      <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+                      <b2 class="lead"><b>{{ project.category }}</b></b2>
+                      <p class="text-muted text-sm"><b>description </b> {{ project.details}} </p>
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
@@ -25,29 +27,16 @@
                     <a href="#" class="btn btn-sm bg-teal">
                       <i class="fas fa-comments"></i>
                     </a>
-                    <a href="#" class="btn btn-sm btn-primary">
-                      <i class="fas fa-user"></i> View Profile
+                    <a href="{% url 'project:viewone' project.project_id%}" class="btn btn-sm btn-primary">
+                      <i class="fas fa-user"></i> view
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-      {% for project in projects%}
 
-        <ul>
-            <li>{{project.project_id}}</li>
-            <li>{{project.title}}</li>
-            <li>{{project.details}}</li>
-            <li>{{project.total_target}}</li>
-            <li>{{project.start_time}}</li>
-            <li>{{project.end_time}}</li>
-            <li>{{project.donation}}</li>
-            <li>{{project.avg_rate}}</li>
-            <a href="{% url 'project:viewone' project.project_id%}"
-                >Enter Project</a
-            >
-        </ul>
+
         {% endfor %}
-        <a href="{% url 'project:add' %}">Add New Project</a>
+
 {% endblock content %}
 
