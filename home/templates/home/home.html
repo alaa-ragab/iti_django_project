@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <form method="GET" autocomplete="off" action="{% url 'home:project_search' %}"
-    class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+    class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto mt-5">
     {% csrf_token %}
 
     <div id="focusArea" class="form-group mb-0">
