@@ -1,8 +1,11 @@
-from django.db.models import Q
-from django.views.generic import ListView
-from django.shortcuts import get_object_or_404, render
+# from django.db.models import Q
+# from django.views.generic import ListView
+# from addproject.views import get_project_data_for_view, projects
+from django.db.models.aggregates import Count
+from django.shortcuts import get_object_or_404, redirect, render
 from addproject.models import Project, ProjectPics, ProjectsCategory
-from addproject.views import get_project_data_for_view, projects
+from django.db.models import Avg
+
 
 # # Create your views here.
 app_name = 'home'
@@ -63,10 +66,44 @@ class SearchResultsView(ListView):
 def home(request):
     categories = ProjectsCategory.objects.all()
     latest = Project.objects.order_by('-created_at')[:5]
-    rating = Project.objects.order_by('-avg_rate')[:5]
+    ProjectRate = Project.objects.annotate(
+        avg=Avg("avg_rate")).order_by('-avg_rate')[:5]
 
     context = {'categories': categories,
                'latest': latest,
-               'rating': rating,
+               'highest_rated': ProjectRate,
                }
     return render(request, 'home/home.html', context)
+
+
+def search_all(request):
+    categories = ProjectsCategory.objects.all()
+    if request.method == "GET":
+        # check if there is a key to search by
+        search_key = request.GET.get('key')
+
+        if search_key:
+
+            # matched by title
+            matched_by_title = Project.objects.filter(
+                title__icontains=search_key)
+
+            context = {"matched_by_title": matched_by_title,
+                       "key": search_key, "categories": categories}
+
+            return render(request, 'home/search_results.html', context)
+
+        # return to the same page if no params are passed
+        return redirect(request.META.get('HTTP_REFERER', 'home'))
+
+
+# def category(request, categoty_id):
+
+#     if request.method == "GET":
+
+#         categories = ProjectsCategory.objects.all()
+#         category = get_object_or_404(ProjectsCategory, id=categoty_id)
+#         projects = Project.objects.filter(category=categoty_id)
+#         context = {"projects": projects,
+#                    "category": category, "categories": categories}
+#     return render(request, 'home/category.html', context)

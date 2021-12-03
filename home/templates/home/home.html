@@ -1,14 +1,84 @@
 {% extends 'base.html' %}
 {% block content %}
-    <section class="content ">
+<form method="GET" autocomplete="off" action="{% url 'home:project_search' %}"
+    class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+    {% csrf_token %}
+
+    <div id="focusArea" class="form-group mb-0">
+        <div class="search-area">
+            <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input class="form-control" id="searchBar" name="key" placeholder="Find Project By Name" type="text">
+            </div>
+            <div id="searchDropDown" class="search-dropdown rounded  border border-2 mt-1 p-2" tabindex="0">
+            </div>
+        </div>
+    </div>
+</form>
+<section class="content ">
+    <div class="staff-picks-content">
+        <h1 class="text-center mb-5">Highest Rated Projects</h1>
+        <div class="staff-picks-slider slider-controls-top owl-carousel">
+            {% for project in highest_rated %}
+            <div class="staff-picks-item clearfix">
+                <a class="staff-picks-image col-md-6 col-12" href="">
+                    <img src="https://picsum.photos/400/250?grayscale" alt="">
+                </a>
+                <div class="staff-picks-item-content staff-picks-box">
+                    <a href="#" class="category">{{ project.total_target }}</a>
+                    <h3>
+                        <a href="">{{ project.title }}</a>
+                    </h3>
+                    <div class="staff-picks-description">
+                        {{ project.details }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="row  mt-4">
+        <div class="container-fluid mt-3">
+            <!-- 
+            <div id="carouselExampleFade" class="mt-3 carousel slide carousel-fade" data-interval="1000"
+                data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for project in highest_rated %}
+                    {% if forloop.first %}
+                    <div class="carousel-item active">
+                        {% else %}
+                        <div class="carousel-item">
+                            {% endif %}
+                            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                                <div class="card-body d-flex flex-column align-items-start">
+                                    <strong class="d-inline-block mb-2 text-primary"><a
+                                            href="#">{{project.title}}</a></strong>
+                                    <p class="card-text mb-auto cut-text">{{project.details}}</p>
+                                </div>
+                                <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]"
+                                    src="https://picsum.photos/400/250?grayscale" style="width:400px; height: 250px;">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <hr>
+            </div> -->
 
 
-                <div class="row  mt-4">
-<!--
-
-sliders here
-
--->
             <div class="col-6">
                 <div class="card">
                     <div class="card-header border-0">
@@ -18,34 +88,34 @@ sliders here
                     <div class="card-body table-responsive p-0">
                         <table class="table table-striped table-valign-middle">
                             <thead>
-                            <tr>
-                                <th>Project</th>
-                                <th>Category</th>
-                                <th>Sales</th>
-                                <th>More</th>
-                            </tr>
+                                <tr>
+                                    <th>Project</th>
+                                    <th>Category</th>
+                                    <th>Sales</th>
+                                    <th>More</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            {% for latest in latest %}
-                            <tr>
-                                <td>
-                                    {{ latest.title }}
-                                </td>
-                                <td>{{latest.category}}</td>
-                                <td>
-                                    <small class="text-success mr-1">
-                                        <i class="fas fa-arrow-up"></i>
-                                        12%
-                                    </small>
-                                    12,000 Sold
-                                </td>
-                                <td>
-                                    <a href="{%  url 'project:viewone' latest.project_id %}" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
+                                {% for latest in latest %}
+                                <tr>
+                                    <td>
+                                        {{ latest.title }}
+                                    </td>
+                                    <td>{{latest.category}}</td>
+                                    <td>
+                                        <small class="text-success mr-1">
+                                            <i class="fas fa-arrow-up"></i>
+                                            12%
+                                        </small>
+                                        12,000 Sold
+                                    </td>
+                                    <td>
+                                        <a href="{%  url 'project:viewone' latest.project_id %}" class="text-muted">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -61,34 +131,34 @@ sliders here
                     <div class="card-body table-responsive p-0">
                         <table class="table table-striped table-valign-middle">
                             <thead>
-                            <tr>
-                                <th>Project</th>
-                                <th>Category</th>
-                                <th>rates</th>
-                                <th>More</th>
-                            </tr>
+                                <tr>
+                                    <th>Project</th>
+                                    <th>Category</th>
+                                    <th>rates</th>
+                                    <th>More</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <img src="dist/img/default-150x150.png" alt="Product 1"
-                                         class="img-circle img-size-32 mr-2">
-                                    Some Product
-                                </td>
-                                <td>$13 USD</td>
-                                <td>
-                                    <small class="text-success mr-1">
-                                        <i class="fas fa-arrow-up"></i>
-                                        12%
-                                    </small>
-                                    12,000 Sold
-                                </td>
-                                <td>
-                                    <a href="#" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <img src="dist/img/default-150x150.png" alt="Product 1"
+                                            class="img-circle img-size-32 mr-2">
+                                        Some Product
+                                    </td>
+                                    <td>$13 USD</td>
+                                    <td>
+                                        <small class="text-success mr-1">
+                                            <i class="fas fa-arrow-up"></i>
+                                            12%
+                                        </small>
+                                        12,000 Sold
+                                    </td>
+                                    <td>
+                                        <a href="#" class="text-muted">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -104,23 +174,23 @@ sliders here
                     <div class="card-body table-responsive p-0">
                         <table class="table table-striped table-valign-middle">
                             <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>More</th>
-                            </tr>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>More</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            {% for category in categories %}
-                            <tr>
-                                <td>
-                                    {{category.categories}}
-                                <td>
-                                    <a href="{% url 'project:project_categories' category.id %}" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
+                                {% for category in categories %}
+                                <tr>
+                                    <td>
+                                        {{category.categories}}
+                                    <td>
+                                        <a href="{% url 'project:project_categories' category.id %}" class="text-muted">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -128,5 +198,5 @@ sliders here
                 </div>
             </div>
         </div>
-    </section>
+</section>
 {% endblock content %}
