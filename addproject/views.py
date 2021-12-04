@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from .models import FeaturedProject, Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, \
-    ReportedComments, ProjectsTags
+    ReportedComments
 from .form import ProjectForm, CategoryForm
 from django.contrib.auth.decorators import login_required
 
@@ -28,15 +28,16 @@ def addprojects(request, *args):
             myform = form.save(commit=False)
             myform.user = request.user
             myform.save()
+            form.save_m2m()
             # img handle
             id = Project.objects.get(project_id=myform.project_id)
             pics = request.FILES.getlist('pic')
             for pic in pics:
                 ProjectPics.objects.create(project_id=id, pic=pic)
 
-            tags = request.POST.getlist('tags')
-            for tag in tags:
-                ProjectsTags.objects.create(project_id=id, tags=tag)    
+            # tags = request.POST.getlist('tags')
+            # for tag in tags:
+            #     ProjectsTags.objects.create(project_id=id, tags=tag)    
             return redirect('project:viewall')
 
     return render(request, 'addproject/projectform.html', {'form': form})
