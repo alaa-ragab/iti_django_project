@@ -23,7 +23,7 @@
         <div class="staff-picks-slider slider-controls-top owl-carousel">
             {% for project in highest_rated %}
             <div class="staff-picks-item clearfix">
-                <a class="staff-picks-image col-md-6 col-12" href="">
+                <a class="staff-picks-image col-md-6 col-12" href="{%  url 'project:viewone' project.project_id %}">
                     <img src="{{ project.image_url|default_if_none:'/media/images/default.jpg' }}" alt="">
                 </a>
                 <div class="staff-picks-item-content staff-picks-box"
