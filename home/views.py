@@ -69,7 +69,7 @@ def home(request):
     ProjectRate = Project.objects.order_by('-avg_rate')[:5]
     top_featured = Project.objects.filter(
         featured=True).order_by('-start_time')[:5]
-    print(ProjectRate)
+    # print(ProjectRate)
     context = {'categories': categories,
                'latest': latest,
                'highest_rated': ProjectRate,
