@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <section class="container row m-4">
+    <section class="container m-4">
       {% for project in projects%}
-            <div class="card col-6 m-4" style="width: 40rem;">
+            <div class="card  m-4" style="width: 87rem;">
               {% for img in imgs %}
               {% if img.project_id_id == project.project_id and forloop.first %}
               <img src=../../../media/{{img.pic}} class="card-img-top" alt="...">
