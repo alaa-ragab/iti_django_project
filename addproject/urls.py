@@ -23,7 +23,7 @@ app_name = 'project'
 urlpatterns = [
     path('', projects, name='viewall'),
     path('<int:id>', project, name='viewone'),
-    path('add_project', addprojects, name='add'),
-    path('add_category', category, name='addcategory'),
+    path('addproject', addprojects, name='add'),
+    path('addcategory', category, name='addcategory'),
     path('category/<int:id>', get_category_pro, name='project_categories'),
 ]
