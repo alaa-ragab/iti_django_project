@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+def image_upload(instance,filename):
+    imagename , extension = filename.split(".")
+    return "images/%s.%s"%(instance.title,extension)
 
 class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
@@ -17,6 +20,11 @@ class Project(models.Model):
     category = models.ForeignKey('ProjectsCategory', on_delete=models.CASCADE)
     created_at = models.DateField(auto_now=True)
     featured = models.BooleanField(default=False, null=True)
+    image = models.ImageField(upload_to=image_upload,blank=True, null=True)
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+          return self.image.url
 
 
 
@@ -30,7 +38,7 @@ class ProjectsTags(models.Model):
 
 class ProjectPics(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    pic = models.ImageField(upload_to='images/')
+    pic = models.ImageField(upload_to=image_upload)
 
 
 class ProjectComments(models.Model):

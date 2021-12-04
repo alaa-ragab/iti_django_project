@@ -24,15 +24,16 @@
             {% for project in highest_rated %}
             <div class="staff-picks-item clearfix">
                 <a class="staff-picks-image col-md-6 col-12" href="">
-                    <img src="https://picsum.photos/400/250?grayscale" alt="">
+                    <img src="{{ project.image_url|default_if_none:'/media/images/default.jpg' }}" alt="">
                 </a>
-                <div class="staff-picks-item-content staff-picks-box">
-                    <a href="#" class="category">{{ project.total_target }}</a>
+                <div class="staff-picks-item-content staff-picks-box"
+                    style="background-color: beige;padding:10px;border:.5px solid #555;border-radius:5px;max-height:250px;min-height:200px;hidden">
                     <h3>
-                        <a href="">{{ project.title }}</a>
+                        <a href="">Project-Title: {{ project.title }}</a>
                     </h3>
                     <div class="staff-picks-description">
-                        {{ project.details }}
+                        <p>Total-target: {{ project.total_target }}</p>
+                        <p>Project-Details: {{ project.details }}</p>
                     </div>
                 </div>
             </div>
