@@ -135,31 +135,34 @@
                                 <tr>
                                     <th>Project</th>
                                     <th>Category</th>
-                                    <th>rates</th>
+                                    <th>Ratings</th>
                                     <th>More</th>
                                 </tr>
                             </thead>
                             <tbody>
+
+                                {% for feat_project in top_featured %}
                                 <tr>
                                     <td>
-                                        <img src="dist/img/default-150x150.png" alt="Product 1"
-                                            class="img-circle img-size-32 mr-2">
-                                        Some Product
+                                        {{feat_project.title}}
                                     </td>
-                                    <td>$13 USD</td>
+                                    <td>{{feat_project.category}}</td>
                                     <td>
                                         <small class="text-success mr-1">
                                             <i class="fas fa-arrow-up"></i>
-                                            12%
+                                            {{feat_project.ratings}}
                                         </small>
-                                        12,000 Sold
                                     </td>
                                     <td>
-                                        <a href="#" class="text-muted">
+                                        <a href="{%  url 'project:viewone' feat_project.project_id %}"
+                                            class="text-muted">
+
                                             <i class="fas fa-search"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                {% endfor %}
+
                             </tbody>
                         </table>
                     </div>

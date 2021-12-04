@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 def image_upload(instance,filename):
     imagename , extension = filename.split(".")
-    return "images/%s.%s"%(instance.title,extension)
+    return "images/%s.%s"%(instance.project_id,extension)
 
 class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
