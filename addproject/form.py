@@ -6,7 +6,7 @@ from .models import Project, ProjectsCategory
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title', 'details', 'total_target', 'start_time', 'end_time', 'tag', 'category']
+        fields = ['title', 'details', 'total_target', 'start_time', 'end_time', 'featured', 'category']
 
 
 class CategoryForm(forms.ModelForm):

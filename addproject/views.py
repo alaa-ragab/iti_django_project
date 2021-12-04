@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from .models import FeaturedProject, Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, \
-    ReportedComments
+    ReportedComments, ProjectsTags
 from .form import ProjectForm, CategoryForm
 from django.contrib.auth.decorators import login_required
 
@@ -31,6 +31,10 @@ def addprojects(request, *args):
             pics = request.FILES.getlist('pic')
             for pic in pics:
                 ProjectPics.objects.create(project_id=id, pic=pic)
+
+            tags = request.POST.getlist('tags')
+            for tag in tags:
+                ProjectsTags.objects.create(project_id=id, tags=tag)    
             return redirect('project:viewall')
 
     return render(request, 'addproject/projectform.html', {'form': form})
@@ -42,7 +46,12 @@ def project(request, id):
         project = Project.objects.filter(project_id=id)[0]
         comments = ProjectComments.objects.filter(project_id=id)
         imgs = ProjectPics.objects.all()
-        return render(request, 'addproject/project.html', {'project': project, 'comments': comments, 'imgs' : imgs})
+        x = False
+        if project.donation / project.total_target <= 0.25 :
+            x = True
+
+        projects = Project.objects.all()
+        return render(request, 'addproject/project.html', {'project': project, 'comments': comments, 'imgs' : imgs, 'x' : x, 'projects' : projects })
 
     else:
         project = Project.objects.filter(project_id=id)
@@ -70,6 +79,8 @@ def project(request, id):
             ReportedComments.objects.create(com_id=int(
                 request.POST['com_id']), com_report='Reported Comment')
 
+        if 'cancel' in request.POST:
+            project.delete()
         # canceling project
 
         return redirect(f'/')
@@ -77,11 +88,13 @@ def project(request, id):
 
 @login_required(login_url='login')
 def category(request):
-    form = CategoryForm()
-    if request.method == 'POST':
-        form = CategoryForm(request.POST)
-        form.save()
-    return render(request, 'addproject/categoryform.html', {'form': form})
+    if request.user.is_superuser :
+        form = CategoryForm()
+        if request.method == 'POST':
+            form = CategoryForm(request.POST)
+            form.save()
+        return render(request, 'addproject/categoryform.html', {'form': form})
+    return HttpResponse('You are not Allowed!')    
 
 
 def get_project_data_for_view(model):

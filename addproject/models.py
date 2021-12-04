@@ -15,8 +15,17 @@ class Project(models.Model):
     raters = models.IntegerField(default=0)
     avg_rate = models.FloatField(default=0)
     category = models.ForeignKey('ProjectsCategory', on_delete=models.CASCADE)
-    tag = models.ManyToManyField('ProjectsTags')
     created_at = models.DateField(auto_now=True)
+    featured = models.BooleanField(default=False, null=True)
+
+
+
+class ProjectsTags(models.Model):
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    tags = models.CharField(max_length=20)
+
+    def __str__(self):
+        return str(self.tags)
 
 
 class ProjectPics(models.Model):
@@ -40,11 +49,6 @@ class ReportedProjects(models.Model):
     pro_report = models.CharField(max_length=400)
 
 
-class ProjectsTags(models.Model):
-    tags = models.CharField(max_length=20)
-
-    def __str__(self):
-        return str(self.tags)
 
 
 class ProjectsCategory(models.Model):

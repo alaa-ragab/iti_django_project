@@ -87,7 +87,9 @@
                     </div>
                 </ul>
                 </div>
-    
+                {% if x and project.user_id == request.user.id %}
+                    <button name = 'cancel' > Cancel </button>
+                {% endif %}
                 <a href="{% url 'project:viewall' %}">Back</a>
              
             </form>

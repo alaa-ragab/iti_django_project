@@ -66,9 +66,8 @@ class SearchResultsView(ListView):
 def home(request):
     categories = ProjectsCategory.objects.all()
     latest = Project.objects.order_by('-created_at')[:5]
-    ProjectRate = Project.objects.annotate(
-        avg=Avg("avg_rate")).order_by('-avg_rate')[:5]
-
+    ProjectRate = Project.objects.order_by('-avg_rate')[:5]
+    print(ProjectRate)
     context = {'categories': categories,
                'latest': latest,
                'highest_rated': ProjectRate,
