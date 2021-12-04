@@ -15,6 +15,7 @@ def projects(request):
     context = {}
     context['projects'] = Project.objects.all()
     context['imgs'] = ProjectPics.objects.all()
+
     return render(request, 'addproject/projects.html', context)
 
 
@@ -46,13 +47,14 @@ def project(request, id):
     if request.method == 'GET':
         project = Project.objects.filter(project_id=id)[0]
         comments = ProjectComments.objects.filter(project_id=id)
-        imgs = ProjectPics.objects.all()
+        imgs = ProjectPics.objects.filter(project_id = id)
         x = False
         if project.donation / project.total_target <= 0.25 :
             x = True
 
         projects = Project.objects.all()
-        return render(request, 'addproject/project.html', {'project': project, 'comments': comments,  'imgs' : imgs, 'x' : x, 'projects' : projects })
+        return render(request, 'addproject/project.html',
+        {'project': project, 'comments': comments,  'imgs' : imgs, 'x' : x, 'projects' : projects })
 
     else:
         project = Project.objects.filter(project_id=id)
@@ -82,7 +84,6 @@ def project(request, id):
 
         if 'cancel' in request.POST:
             project.delete()
-        # canceling project
 
         return redirect(f'/project/{id}')
 
