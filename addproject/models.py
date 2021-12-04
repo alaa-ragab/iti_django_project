@@ -21,6 +21,7 @@ class Project(models.Model):
     created_at = models.DateField(auto_now=True)
     featured = models.BooleanField(default=False, null=True)
     image = models.ImageField(upload_to=image_upload,blank=True, null=True)
+    tags = models.ManyToManyField('Tags')
     @property
     def image_url(self):
         if self.image and hasattr(self.image, 'url'):
@@ -28,12 +29,11 @@ class Project(models.Model):
 
 
 
-class ProjectsTags(models.Model):
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    tags = models.CharField(max_length=20)
+class Tags(models.Model):
+    tag = models.CharField(max_length=20)
 
     def __str__(self):
-        return str(self.tags)
+        return str(self.tag)
 
 
 class ProjectPics(models.Model):

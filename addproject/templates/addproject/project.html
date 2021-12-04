@@ -23,15 +23,15 @@
                 </div>
             </div>
             
-            <!-- start Slider -->
+            <!-- Start Slider -->
             <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="1500">
                 <div class="carousel-inner">
                     {% for img in imgs %}
-                    {% if img.project_id_id == project.project_id and forloop.first %}
+                    {% if forloop.first %}
                     <div class="carousel-item active">
-                        <img src= ../../../media/images/images_1.jfif class="d-block w-100" alt="...">
+                        <img src=../../../media/{{img.pic}} class="d-block w-100" alt="...">
                     </div>
-                    {% else %}
+                    {%else%}
                     <div class="carousel-item">
                         <img src=../../../media/{{img.pic}} class="d-block w-100" alt="...">
                     </div>
@@ -46,9 +46,10 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
                 </button>
-              </div>
-              <!-- End Slider -->              
-                
+              </div> 
+               <!-- End Slider  -->
+              
+            
                 <div class="row mt-4 justify-content-between">
                     <div class="col-4 ml-3 alert alert-info">
                         <h3 >${{project.donation}} <p>raised of ${{project.total_target}}</p></h3>
