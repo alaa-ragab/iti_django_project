@@ -1,6 +1,6 @@
 # from django.db.models import Q
 # from django.views.generic import ListView
-# from addproject.views import get_project_data_for_view, projects
+from addproject.views import get_project_data_for_view, projects
 from django.db.models.aggregates import Count
 from django.shortcuts import get_object_or_404, redirect, render
 from addproject.models import Project, ProjectPics, ProjectsCategory
@@ -67,7 +67,8 @@ def home(request):
     categories = ProjectsCategory.objects.all()
     latest = Project.objects.order_by('-created_at')[:5]
     ProjectRate = Project.objects.order_by('-avg_rate')[:5]
-    top_featured = Project.objects.filter(featured=True).order_by('-start_time')[:5]
+    top_featured = Project.objects.filter(
+        featured=True).order_by('-start_time')[:5]
     print(ProjectRate)
     context = {'categories': categories,
                'latest': latest,
