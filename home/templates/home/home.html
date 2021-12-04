@@ -23,16 +23,17 @@
         <div class="staff-picks-slider slider-controls-top owl-carousel">
             {% for project in highest_rated %}
             <div class="staff-picks-item clearfix">
-                <a class="staff-picks-image col-md-6 col-12" href="">
-                    <img src="https://picsum.photos/400/250?grayscale" alt="">
+                <a class="staff-picks-image col-md-6 col-12" href="{%  url 'project:viewone' project.project_id %}">
+                    <img src="{{ project.image_url|default_if_none:'/media/images/default.jpg' }}" alt="">
                 </a>
-                <div class="staff-picks-item-content staff-picks-box">
-                    <a href="#" class="category">{{ project.total_target }}</a>
+                <div class="staff-picks-item-content staff-picks-box"
+                    style="background-color: beige;padding:10px;border:.5px solid #555;border-radius:5px;max-height:250px;min-height:200px;hidden">
                     <h3>
-                        <a href="">{{ project.title }}</a>
+                        <a href="">Project-Title: {{ project.title }}</a>
                     </h3>
                     <div class="staff-picks-description">
-                        {{ project.details }}
+                        <p>Total-target: {{ project.total_target }}</p>
+                        <p>Project-Details: {{ project.details }}</p>
                     </div>
                 </div>
             </div>
@@ -134,31 +135,34 @@
                                 <tr>
                                     <th>Project</th>
                                     <th>Category</th>
-                                    <th>rates</th>
+                                    <th>Ratings</th>
                                     <th>More</th>
                                 </tr>
                             </thead>
                             <tbody>
+
+                                {% for feat_project in top_featured %}
                                 <tr>
                                     <td>
-                                        <img src="dist/img/default-150x150.png" alt="Product 1"
-                                            class="img-circle img-size-32 mr-2">
-                                        Some Product
+                                        {{feat_project.title}}
                                     </td>
-                                    <td>$13 USD</td>
+                                    <td>{{feat_project.category}}</td>
                                     <td>
                                         <small class="text-success mr-1">
                                             <i class="fas fa-arrow-up"></i>
-                                            12%
+                                            {{feat_project.ratings}}
                                         </small>
-                                        12,000 Sold
                                     </td>
                                     <td>
-                                        <a href="#" class="text-muted">
+                                        <a href="{%  url 'project:viewone' feat_project.project_id %}"
+                                            class="text-muted">
+
                                             <i class="fas fa-search"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                {% endfor %}
+
                             </tbody>
                         </table>
                     </div>
