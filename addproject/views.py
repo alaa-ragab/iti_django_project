@@ -84,7 +84,7 @@ def project(request, id):
             project.delete()
         # canceling project
 
-        return redirect(f'/')
+        return redirect(f'/project/{id}')
 
 
 @login_required(login_url='login')
