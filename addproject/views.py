@@ -33,8 +33,8 @@ def addprojects(request, *args):
             # img handle
             id = Project.objects.get(project_id=myform.project_id)
             pics = request.FILES.getlist('pic')
-            Project.objects.filter(project_id = id.project_id).update(picture = pics[0])
             for pic in pics:
+                Project.objects.filter(project_id = id.project_id).update(picture = pic)
                 ProjectPics.objects.create(project_id=id, pic=pic)  
             return redirect('project:viewall')
 
