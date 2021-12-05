@@ -36,56 +36,67 @@
            with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview">
                     <a href="{% url 'home:home' %}" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
                         <p>
                             Home
                         </p>
                     </a>
 
                 </li>
-                <li class="nav-item has-treeview">
+                <!-- <li class="nav-item has-treeview">
                     <a href="{% url 'project:viewall' %}" class="nav-link">
                         <i class="nav-icon fas fa-tasks"></i>
                         <p>
                             Projects
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item has-treeview">
                     <a href="{% url 'project:add' %}" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
+                        <!-- <i class="nav-icon fas fa-copy"></i> -->
                         <p>
                             Start Project
 
                         </p>
                     </a>
                 </li>
+                {% if request.user.is_superuser %}
                 <li class="nav-item has-treeview">
-                    <a href="{% url 'project:add' %}" class="nav-link">
-                        <i class="nav-icon fas fa-building"></i>
+                    <a href="{% url 'project:addcategory' %}" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-building"></i> -->
                         <p>
-                            Company
+                            Add New Category
 
                         </p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
+                    <a href="{% url 'project:addtag' %}" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-building"></i> -->
+                        <p>
+                            Add New Tag
+
+                        </p>
+                    </a>
+                </li>
+                {% endif %}
+                <!-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Contacts
                         </p>
                     </a>
-                </li>
+                </li> -->
 
-                <li class="nav-item has-treeview">
+                <!-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>
                             Tasks
                         </p>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

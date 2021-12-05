@@ -67,10 +67,10 @@
             </div>
             <div class=" row justify-content-between mt-4">
                 {% if project.total_target > project.donation %}
-                <div class="col-5"><input type="number" class='form-control' placeholder="Donate here" name="donate" />
+                <div class="col-5"><input type="number" class='form-control' name="donate" />
                 </div>
                 {% endif %}
-                <div class="col-5"><input type="number" class='form-control' placeholder="Rate here" name="rate" max='10'
+                <div class="col-5"><input type="number" class='form-control' name="rate" max='10'
                         min='0' /></div>
             </div>
             <div class="row justify-content-between mt-1">
@@ -129,6 +129,7 @@
         <li class="list-group-item">{{s_project.category}}</li>
       </ul>
       <div class="card-body">
+        <a href="{% url 'project:viewone' s_project.project_id%}" class="card-link">View</a>
       </div>
     </div>
     {% endif %}

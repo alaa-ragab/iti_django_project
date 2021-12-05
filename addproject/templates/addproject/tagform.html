@@ -2,7 +2,7 @@
 {% block content %}
 <head>
     <meta charset="UTF-8">
-    <title>New Categories</title>
+    <title>New Tags</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         label{
@@ -12,14 +12,14 @@
     </style>
 </head>
 <body>
-<h2 class="alert alert-info p-4 m-4">Add Category</h2>
+<h2 class="alert alert-info p-4 m-4">Add New Tag</h2>
 <div class = 'container'>
 {% load widget_tweaks %}
 <form method= 'post' class = needs-validation enctype="multipart/form-data">
 {% csrf_token %}
 <div class="form-group">
-    <label>Category</label>
-{% render_field form.category class="form-control" placeholder="Category name" type="text" %}
+    <label>Tag</label>
+{% render_field form.tag class="form-control" placeholder="Tag name" type="text" %}
 <br>
 <h4 style="margin: 5px;">{{msg}}</h4>
 </div>

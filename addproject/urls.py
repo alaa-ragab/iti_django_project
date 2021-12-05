@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
-from .views import addprojects, projects, project, category, get_category_pro
+from .views import addprojects, projects, project, category, get_category_pro, tag
 
 app_name = 'project'
 
@@ -25,5 +25,6 @@ urlpatterns = [
     path('<int:id>', project, name='viewone'),
     path('addproject', addprojects, name='add'),
     path('addcategory', category, name='addcategory'),
+    path('addtag', tag, name='addtag'),
     path('category/<int:id>', get_category_pro, name='project_categories'),
 ]

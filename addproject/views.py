@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from .models import FeaturedProject, Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, \
-    ReportedComments, Tags
-from .form import ProjectForm, CategoryForm
+    ReportedComments, Tags, ProjectsCategory
+from .form import ProjectForm, CategoryForm, TagsForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -96,9 +96,32 @@ def category(request):
     if request.user.is_superuser :
         form = CategoryForm()
         if request.method == 'POST':
+            msg = 'Done'
             form = CategoryForm(request.POST)
-            form.save()
-        return render(request, 'addproject/categoryform.html', {'form': form})
+            try:
+                form.save()
+            except:
+                msg = 'Category name is already exists!'    
+            return render(request, 'addproject/categoryform.html', {'form': form, 'msg' : msg})
+        return render(request, 'addproject/categoryform.html', {'form': form, })
+
+    return HttpResponse('You are not Allowed!')    
+
+
+@login_required(login_url='login')
+def tag(request):
+    if request.user.is_superuser :
+        form = TagsForm()
+        if request.method == 'POST':
+            msg = 'Done'
+            form = TagsForm(request.POST)
+            try:
+                form.save()
+            except:
+                msg = 'Tag name is already exists!'    
+            return render(request, 'addproject/tagform.html', {'form': form, 'msg' : msg})
+        return render(request, 'addproject/tagform.html', {'form': form, })
+
     return HttpResponse('You are not Allowed!')    
 
 
