@@ -18,7 +18,7 @@
 </form>
 <section class="content ">
     <div class="staff-picks-content">
-        <h1 class="text-center mb-5">Highest Rated Projects</h1>
+        <h1 class="text-center mb-5 text-info">Highest Rated Projects</h1>
         <div class="staff-picks-slider slider-controls-top owl-carousel">
             {% for project in highest_rated %}
             <div class="staff-picks-item clearfix">
@@ -26,14 +26,14 @@
                     <img style="max-height:300px;min-height:300px"
                         src="{{ project.image_url|default_if_none:'/media/images/default.jpg' }}" alt="">
                 </a>
-                <div class="staff-picks-item-content staff-picks-box"
-                    style="background-color: beige;padding:10px;border:.5px solid #555;border-radius:5px;max-height:250px;min-height:200px;hidden">
-                    <h3>
-                        <a href="{%  url 'project:viewone' project.project_id %}">Project-Title: {{ project.title }}</a>
+                <div class="bg-light text-black"
+                    style="padding:8px;border:.5px solid #555;border-radius:5px;max-height:250px;min-height:200px">
+                    <h3 class="text-primary">
+                        Project-Title: <a href="{%  url 'project:viewone' project.project_id %}">{{ project.title }}</a>
                     </h3>
                     <div class="staff-picks-description">
                         <p>Total-target: {{ project.total_target }}</p>
-                        <p>Project-Details: {{ project.details }}</p>
+                        <p">Project-Details: {{ project.details }}</p>
                     </div>
                 </div>
             </div>
@@ -43,11 +43,10 @@
 
     <div class="container-fluid mt-3">
         <div class="row  mt-4">
-
             <div class="col-12">
                 <div class="card">
                     <div class="card-header border-0">
-                        <h3 class="card-title">Latest project</h3>
+                        <h2 class="card-title text-info font-weight-bold">Latest project</h2>
 
                     </div>
                     <div class="card-body table-responsive p-0">
@@ -89,7 +88,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header border-0">
-                        <h3 class="card-title">Feature projects</h3>
+                        <h3 class="card-title text-info font-weight-bold">Feature projects</h3>
 
                     </div>
                     <div class="card-body table-responsive p-0">
@@ -135,7 +134,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header border-0">
-                        <h3 class="card-title">Projects Category</h3>
+                        <h3 class="card-title text-info font-weight-bold">Projects Category</h3>
 
                     </div>
                     <div class="card-body table-responsive p-0">
