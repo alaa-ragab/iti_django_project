@@ -14,19 +14,23 @@
     <div class="container">
       {% if matched_by_title %}
 
-      {% for project in matched_by_title %}
+      <div class="container">
+        <div class="row">
+          {% for project in matched_by_title %}
+          <div class="ml-5 col-3 card card-stats mb-4 mb-xl-4 text-center h-100 shadow">
 
-      <div class="ml-5 col-3 card card-stats mb-4 mb-xl-4 text-center h-100 shadow">
+            <h3 class="card-header">{{project.title}}</h3>
+            <img class="card-img-top" src="../../../media/images/{{project.picture}}" alt="project image">
+            <div class="card-body">
+              <h5 class="card-text cut-text mb-3">By: {{project.user}}</h5>
+              <h5>Target: {{project.total_target}} </h5>
+              <p class="card-text cut-text ">Details: {{project.details}}</p>
+            </div>
+          </div>
 
-        <h3 class="card-header">{{project.title}}</h3>
-        <img class="card-img-top" src="{{project.image.url}}" alt="project image">
-        <div class="card-body">
-          <h5 class="card-text cut-text mb-3">By: {{project.user}}</h5>
-          <h5>Target: {{project.total_target}} </h5>
-          <p class="card-text cut-text ">Details: {{project.details}}</p>
+          {% endfor %}
         </div>
       </div>
-      {% endfor %}
       {% else %}
       <h3 class="text-center mt-5"> No matches found!</h3>
       {% endif %}

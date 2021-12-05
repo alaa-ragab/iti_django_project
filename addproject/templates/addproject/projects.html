@@ -1,23 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-    <section class="d-flex align-content-stretch flex-wrap m-4">
-      {% for project in projects%}
-            <div class="card  m-4" style="width: 87rem;">
-                  <img src=../../../media/images/{{project.picture}} class="card-img-top" alt="...">
-              <div class="card-body">
-                <h1 class="card-title mb-4">{{project.title}}</h1>
-                
-                <p class="card-text">{{project.details}}</p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><h3 >${{project.donation}} <p>raised of ${{project.total_target}}</p></h3></li>
-                <li class="list-group-item">{{project.category}}</li>
-              </ul>
-              <div class="card-body">
-                <a href="{% url 'project:viewone' project.project_id%}" class="card-link">View</a>
-              </div>
-            </div>
-        {% endfor %}
-      </section>     
-{% endblock content %}
+<section class="d-flex align-content-stretch flex-wrap m-4">
+  {% for project in projects%}
+  <div class="card  m-4" style="width: 87rem;">
+    <img src=../../../media/images/{{project.picture}} class="card-img-top" alt="...">
+    <div class="card-body">
+      <h1 class="card-title mb-4">{{project.title}}</h1>
 
+      <p class="card-text">{{project.details}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h3>${{project.donation}} <p>raised of ${{project.total_target}}</p>
+        </h3>
+      </li>
+      <li class="list-group-item">{{project.category}}</li>
+    </ul>
+    <div class="card-body">
+      <a href="{% url 'project:viewone' project.project_id%}" class="card-link">View</a>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock content %}
