@@ -24,7 +24,8 @@
             <div class="staff-picks-item clearfix">
                 <a class="staff-picks-image col-md-6 col-12" href="{%  url 'project:viewone' project.project_id %}">
                     <img style="max-height:300px;min-height:300px"
-                        src="{{ project.image_url|default_if_none:'/static/admin/img/None.jpg' }}" alt="">
+                        src="../../../media/images/{{project.picture|default_if_none:'/static/admin/img/None.jpg'}}"
+                        alt="">
                 </a>
                 <div class="bg-light text-black"
                     style="padding:8px;border:.5px solid #555;border-radius:5px;max-height:250px;min-height:200px">
