@@ -5,6 +5,7 @@ from .models import Project, ProjectsCategory, Tags
 
 class ProjectForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(queryset=Tags.objects.all())
+    
     class Meta:
         model = Project
         fields = ['title', 'details', 'total_target', 'start_time', 'end_time', 'featured', 'tags', 'category']

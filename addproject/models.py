@@ -9,7 +9,7 @@ class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    details = models.CharField(max_length=400)
+    details = models.TextField(max_length=400)
     total_target = models.IntegerField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()

@@ -48,7 +48,7 @@
                                     <label>Details </label>
                                 </div>
                                 <div class="col-md-12">
-                                    {% render_field form.details type="textbox" class="form-control"  placeholder="Details" %}
+                                    {% render_field form.details|attr:"rows:3" class="form-control"  placeholder="Details" %}
                                     {% if form.details.errors %}
                                         {{  form.details.errors }}
                                     {% endif %}
@@ -83,7 +83,7 @@
                                     <label>Tags</label>
                                 </div>
                                 <div class="col-md-12">
-                                    {% render_field form.tags type="date" class="form-control" %}
+                                    {% render_field form.tags|attr:"size:3" type="date" class="form-control" %}
                                     {% if form.tags.errors %}
                                         {{  form.tags.errors }}
                                     {% endif %}
