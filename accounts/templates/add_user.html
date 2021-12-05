@@ -13,7 +13,7 @@
 <body class="register-page" style="min-height: 586.781px;">
 <div class="register-box">
     <div class="register-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <p ><b>AMA</b></p>
     </div>
 
     <div class="card">
@@ -25,26 +25,28 @@
                 <div class="row">
                     <div class="input-group mb-3 col-6">
                         {% render_field uform.first_name class="form-control" placeholder="First name" %}
-                        {% if uform.first_name.errors %}
-                            {{ uform.first_name.errors }}
-                        {% endif %}
+                       
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                         {% if uform.first_name.errors %}
+                            {{ uform.first_name.errors }}
+                        {% endif %}
                     </div>
 
                     <div class="input-group mb-3 col-6">
                         {% render_field uform.last_name class="form-control" placeholder="Last name" %}
-                        {% if uform.last_name.errors %}
-                            {{ uform.last_name.errors }}
-                        {% endif %}
+                        
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                        {% if uform.last_name.errors %}
+                            {{ uform.last_name.errors }}
+                        {% endif %}
                     </div>
 
 
@@ -52,48 +54,52 @@
 
                 <div class="input-group mb-3">
                     {% render_field uform.username class="form-control" placeholder="Username" %}
+                    
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
                     {% if uform.username.errors %}
                         {{ uform.username.errors }}
                     {% endif %}
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
                 </div>
                 <div class="input-group mb-3">
                     {% render_field uform.email class="form-control" placeholder="Email" %}
-                    {% if uform.email.errors %}
-                        {{ uform.email.errors }}
-                    {% endif %}
+                   
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
+                     {% if uform.email.errors %}
+                        {{ uform.email.errors }}
+                    {% endif %}
                 </div>
 
                 <div class="input-group mb-3">
                     {% render_field uform.password1 class="form-control" placeholder="Password" %}
-                    {% if uform.password1.errors %}
-                        {{ uform.password1.errors }}
-                    {% endif %}
+                   
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
+                     {% if uform.password1.errors %}
+                        {{ uform.password1.errors }}
+                    {% endif %}
                 </div>
                 <div class="input-group mb-3">
                     {% render_field uform.password2 class="form-control" placeholder="Retype password" %}
-                    {% if uform.password2.errors %}
-                        {{ uform.password2.errors }}
-                    {% endif %}
+
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
+                     {% if uform.password2.errors %}
+                        {{ uform.password2.errors }}
+                    {% endif %}
                 </div>
                 <div class="row">
                     <div class="col-4"></div>
@@ -137,6 +143,3 @@
 </body>
 
 </html>
-
-
-

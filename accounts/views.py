@@ -50,7 +50,7 @@ def register(request):
     if request.method == "POST":
         uform = UserForm(request.POST)
         print(uform.errors)
-        if uform.is_valid:
+        if uform.is_valid():
             u = uform.save(commit=False)
             u.is_active = False
             u.save()
