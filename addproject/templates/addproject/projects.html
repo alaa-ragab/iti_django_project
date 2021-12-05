@@ -3,11 +3,8 @@
     <section class="d-flex align-content-stretch flex-wrap m-4">
       {% for project in projects%}
             <div class="card  m-4" style="width: 87rem;">
-              <!-- {% for img in imgs %}
-                  {% if img.project_id_id == project.project_id and forloop.first %}
-                  <img src=../../../media/{{img.pic}} class="card-img-top" alt="...">
-                  {% endif %}
-              {% endfor %} -->
+                  <img src=../../../media/images/{{project.picture}} class="card-img-top" alt="...">
+                  <p>{{project.picture}}</p>
               <div class="card-body">
                 <h1 class="card-title mb-4">{{project.title}}</h1>
                 

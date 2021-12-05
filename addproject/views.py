@@ -1,10 +1,11 @@
 import datetime
+import django
 from django.http.response import HttpResponseBase
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from .models import FeaturedProject, Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, \
-    ReportedComments
+    ReportedComments, Tags
 from .form import ProjectForm, CategoryForm
 from django.contrib.auth.decorators import login_required
 
@@ -32,12 +33,9 @@ def addprojects(request, *args):
             # img handle
             id = Project.objects.get(project_id=myform.project_id)
             pics = request.FILES.getlist('pic')
+            Project.objects.filter(project_id = id.project_id).update(picture = pics[0])
             for pic in pics:
-                ProjectPics.objects.create(project_id=id, pic=pic)
-
-            # tags = request.POST.getlist('tags')
-            # for tag in tags:
-            #     ProjectsTags.objects.create(project_id=id, tags=tag)    
+                ProjectPics.objects.create(project_id=id, pic=pic)  
             return redirect('project:viewall')
 
     return render(request, 'addproject/projectform.html', {'form': form})
@@ -53,9 +51,12 @@ def project(request, id):
         if project.donation / project.total_target <= 0.25 :
             x = True
 
-        projects = Project.objects.all()
+        project_tags = Tags.objects.filter(project = id)
+        similar_projects = django.db.models.query.QuerySet
+        for tag in project_tags:
+            similar_projects = Project.objects.filter(tags = tag)
         return render(request, 'addproject/project.html',
-        {'project': project, 'comments': comments,  'imgs' : imgs, 'x' : x, 'projects' : projects })
+        {'project': project, 'comments': comments,  'imgs' : imgs, 'x' : x , 'similar_projects' : similar_projects})
 
     else:
         project = Project.objects.filter(project_id=id)
@@ -85,6 +86,7 @@ def project(request, id):
 
         if 'cancel' in request.POST:
             project.delete()
+            return redirect(f'/project')
 
         return redirect(f'/project/{id}')
 

@@ -22,6 +22,7 @@ class Project(models.Model):
     featured = models.BooleanField(default=False, null=True)
     image = models.ImageField(upload_to=image_upload,blank=True, null=True)
     tags = models.ManyToManyField('Tags')
+    picture = models.ImageField(upload_to=image_upload)
     @property
     def image_url(self):
         if self.image and hasattr(self.image, 'url'):
