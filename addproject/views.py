@@ -75,7 +75,7 @@ def project(request, id):
             project.update(
                 ratings=(int(project[0].ratings) + int(request.POST['rate'])))
             project.update(raters=(int(project[0].raters) + 1))
-            project.update(avg_rate=project[0].ratings / project[0].raters)
+            project.update(avg_rate=int(project[0].ratings / project[0].raters))
 
         if 'comment_sub' in request.POST:
             ProjectComments.objects.create(
@@ -158,14 +158,9 @@ def get_category_pro(request, id):
 
 class ProjectView(APIView):
     def get(self,request):
-        trainees = Project.objects.all()
-        ser = ProjectSerializer(trainees, many=True)
+        projects = Project.objects.all()
+        ser = ProjectSerializer(projects, many=True)
 
         for i in range(len(ser.data)):
             print(ser.data[i])
         return Response(ser.data)
-
-    def post(self,request):
-        print(request.POST)
-        Project.objects.create(name=request.POST['name'], address=request.POST['address'], bio=request.POST['bio'])
-        return HttpResponse(status=200)
