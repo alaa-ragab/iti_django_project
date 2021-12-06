@@ -36,6 +36,7 @@
                         {% endif %}
                     </div>
 
+
                     <div class="input-group mb-3 col-6">
                         {% render_field uform.last_name class="form-control" placeholder="Last name" %}
                         
@@ -44,10 +45,14 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        {% if uform.last_name.errors %}
+
+                    </div>
+                {% if uform.first_name.errors %}
+                            {{ uform.first_name.errors }}
+                        {% endif %}
+                  {% if uform.last_name.errors %}
                             {{ uform.last_name.errors }}
                         {% endif %}
-                    </div>
 
 
                 </div>
@@ -60,10 +65,11 @@
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
-                    {% if uform.username.errors %}
+
+                </div>
+             {% if uform.username.errors %}
                         {{ uform.username.errors }}
                     {% endif %}
-                </div>
                 <div class="input-group mb-3">
                     {% render_field uform.email class="form-control" placeholder="Email" %}
                    
@@ -72,10 +78,11 @@
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
-                     {% if uform.email.errors %}
+
+                </div>
+             {% if uform.email.errors %}
                         {{ uform.email.errors }}
                     {% endif %}
-                </div>
 
                 <div class="input-group mb-3">
                     {% render_field uform.password1 class="form-control" placeholder="Password" %}
@@ -85,10 +92,11 @@
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
-                     {% if uform.password1.errors %}
+
+                </div>
+             {% if uform.password1.errors %}
                         {{ uform.password1.errors }}
                     {% endif %}
-                </div>
                 <div class="input-group mb-3">
                     {% render_field uform.password2 class="form-control" placeholder="Retype password" %}
 
@@ -97,10 +105,10 @@
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
-                     {% if uform.password2.errors %}
+                </div>
+                {% if uform.password2.errors %}
                         {{ uform.password2.errors }}
                     {% endif %}
-                </div>
                 <div class="row">
                     <div class="col-4"></div>
                     <!-- /.col -->

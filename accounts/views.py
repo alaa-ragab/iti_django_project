@@ -56,6 +56,7 @@ def register(request):
             u.save()
             print(u.email)
             send_activation_email(u, request)
+            return HttpResponse('we have send activation mail')
 
     context = {
         "uform": uform,
@@ -70,7 +71,7 @@ def login_fn(request):
         if request.method == "POST":
             email = request.POST.get('email')
             password = request.POST.get('password')
-            auth = authenticate(username=email, password=password)
+            auth = authenticate(username=email, password=password,is_active=True)
 
             if auth is not None:
                 login(request, auth)
