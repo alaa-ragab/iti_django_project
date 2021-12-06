@@ -9,6 +9,11 @@ from .models import FeaturedProject, Project, ProjectComments, ProjectPics, Proj
 from .form import ProjectForm, CategoryForm, TagsForm
 from django.contrib.auth.decorators import login_required
 
+from rest_framework.views import APIView
+from django.shortcuts import render
+from .serializer import ProjectSerializer
+from rest_framework.response import Response
+
 
 # Create your views here.
 @login_required(login_url='login')
@@ -148,3 +153,19 @@ def get_category_pro(request, id):
     projects = Project.objects.filter(category_id=id)
     context = {"projects": projects}
     return render(request, 'addproject/projects.html', context)
+
+
+
+class ProjectView(APIView):
+    def get(self,request):
+        trainees = Project.objects.all()
+        ser = ProjectSerializer(trainees, many=True)
+
+        for i in range(len(ser.data)):
+            print(ser.data[i])
+        return Response(ser.data)
+
+    def post(self,request):
+        print(request.POST)
+        Project.objects.create(name=request.POST['name'], address=request.POST['address'], bio=request.POST['bio'])
+        return HttpResponse(status=200)

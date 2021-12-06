@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
-from .views import addprojects, projects, project, category, get_category_pro, tag
+from .views import addprojects, projects, project, category, get_category_pro, tag, ProjectView
 
 app_name = 'project'
 
@@ -27,4 +27,6 @@ urlpatterns = [
     path('addcategory', category, name='addcategory'),
     path('addtag', tag, name='addtag'),
     path('category/<int:id>', get_category_pro, name='project_categories'),
+    path('api', ProjectView.as_view()),
+
 ]
