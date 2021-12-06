@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from .models import FeaturedProject, Project, ProjectComments, ProjectPics, ProjectComments, ReportedProjects, \
     ReportedComments, Tags, ProjectsCategory
-from .form import ProjectForm, CategoryForm, TagsForm
+from .form import ProjectForm, CategoryForm, TagsForm, feature_projectForm
 from django.contrib.auth.decorators import login_required
 
 from rest_framework.views import APIView
@@ -127,7 +127,22 @@ def tag(request):
             return render(request, 'addproject/tagform.html', {'form': form, 'msg' : msg})
         return render(request, 'addproject/tagform.html', {'form': form, })
 
+    return HttpResponse('You are not Allowed!')   
+
+@login_required(login_url='login')
+def feature_project(request):
+    projects = Project.objects.filter(featured = 0)
+    if request.user.is_superuser :
+        form = feature_projectForm()
+        if request.method == 'POST':
+            msg = 'Done'
+            form = feature_projectForm(request.POST)
+            Project.objects.filter(title = request.POST['feature_pro']).update(featured = 1)
+            return render(request, 'addproject/feature_project.html', {'form': form, 'msg' : msg ,"projects" : projects})
+        return render(request, 'addproject/feature_project.html', {'form': form,"projects" : projects })
+
     return HttpResponse('You are not Allowed!')    
+
 
 
 def get_project_data_for_view(model):

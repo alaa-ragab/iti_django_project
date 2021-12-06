@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Feature Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        label{
+            font-weight: bold;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+<h2 class="alert alert-info p-4 m-4">Feature Project</h2>
+<div class = 'container'>
+{% load widget_tweaks %}
+<form method= 'post' class = needs-validation enctype="multipart/form-data">
+{% csrf_token %}
+<div class="form-group">
+    <label>Projects</label>
+{% for project in projects %}
+<select class="form-select" name = 'feature_pro'aria-label="Default select example">
+    <option value="{{project.title}}">{{project.title}}</option>
+  </select>
+{% endfor %}
+<br>
+<h4 style="margin: 5px;">{{msg}}</h4>
+</div>
+<button type = 'submit' class="btn btn-primary">Add</button>
+<br/>
+</form>
+
+</div>
+{% endblock content %}

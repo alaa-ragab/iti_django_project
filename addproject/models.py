@@ -24,6 +24,8 @@ class Project(models.Model):
     def image_url(self):
         if self.picture and hasattr(self.picture, 'url'):
             return self.picture.url
+    def __str__(self):
+        return str(self.title)
 
 
 class Tags(models.Model):
@@ -32,6 +34,12 @@ class Tags(models.Model):
     def __str__(self):
         return str(self.tag)
 
+
+class feature_project(models.Model):
+    featured_pro = models.CharField(max_length=20)
+
+    def __str__(self):
+        return str(self.featured_pro)
 
 class ProjectPics(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
